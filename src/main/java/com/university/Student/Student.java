@@ -42,8 +42,7 @@ public class Student {
     }
     public void courserelimination() {
         Set<Course> Listasinrepetir = new HashSet<>(courses);
-        List<Course> courses = new ArrayList<>(Listasinrepetir);
-        setCourses(courses);
+        courses = new ArrayList<>(Listasinrepetir);
     }
 }
 

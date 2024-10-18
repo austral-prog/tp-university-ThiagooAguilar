@@ -1,4 +1,4 @@
-package com.university;
+package com.university.UniversityManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static com.university.UniversityManager.App.main;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -24,7 +25,7 @@ public class AppTest {
         }
 
         try {
-            App.main(new String[]{});  // Running the App's main method
+            main(new String[]{});  // Running the App's main method
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to execute App.main()");
