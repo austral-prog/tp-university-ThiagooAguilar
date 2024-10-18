@@ -1,6 +1,6 @@
-package com.university.Course;
+package com.university.course;
 
-import com.university.Student.Student;
+import com.university.student.Student;
 
 import java.util.ArrayList;
 import java.util.List;

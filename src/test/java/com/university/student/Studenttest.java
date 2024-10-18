@@ -1,10 +1,9 @@
-package com.university.Student;
+package com.university.student;
 
-import com.university.Course.Course;
+import com.university.course.Course;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

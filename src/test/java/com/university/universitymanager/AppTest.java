@@ -1,4 +1,4 @@
-package com.university.UniversityManager;
+package com.university.universitymanager;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static com.university.UniversityManager.App.main;
+import static com.university.universitymanager.App.main;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
