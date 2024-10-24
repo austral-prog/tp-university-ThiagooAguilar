@@ -1,13 +1,13 @@
-package com.university.universitymanager;
+package com.university.universitysystem;
 import com.university.course.Course;
-import com.university.evaluation.Evaluationtypes.Evaluation;
+import com.university.evaluation.Evaluation.Evaluation;
 import com.university.student.Student;
+import com.university.universitysystem.universitysystem.Universitysystem2;
+
 import java.io.IOException;
 import java.util.*;
-import static com.university.universitymanager.universitysystem.Universitysystem.*;
-import static com.university.universitymanager.universitysystem.Universitysystem2.ReadarchiveCSV2;
-import  com.university.universitymanager.universitysystem.Universitysystem2.*;
-import javax.security.auth.Subject;
+import static com.university.universitysystem.universitysystem.Universitysystem.*;
+
 
 
 public class App {
@@ -30,21 +30,23 @@ public class App {
 
     }
 
-    public static void definirnotas(String inputCsv, String outputCsv) throws IOException {
-        Map<Evaluation,Map<String,Integer>> examenes = new HashMap<>();
-        eliminarArchivoSiExiste(outputCsv);
-        ReadarchiveCSV2(inputCsv,examenes);
-        Map<Evaluation,Map<String,Integer>> examenesordenados = new HashMap<>(examenes);
-    }
 
-    public static void main(String[] args) {
+
+
+
+    public static void main(String[] args) throws IOException {
         String inputCsv = "src/main/resources/input.csv";
         String outputCsv = "src/main/resources/solution.csv";
+        String inputCsv2 = "src/main/resources/input_2.csv";
+        String outputCsv2 = "src/main/resources/solution2.csv";
 
         contarCursos(inputCsv, outputCsv);
-
+        Map<String, Evaluation> evaluationsMap = Universitysystem2.readCSV(inputCsv2);
+        Universitysystem2.writeCSV(outputCsv2, evaluationsMap);
+        System.out.println("Archivo generado correctamente: " + outputCsv2);
         System.out.println("Archivo generado correctamente.");
-}}
+    }
+}
 
 
 
