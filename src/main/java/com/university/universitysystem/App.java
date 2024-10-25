@@ -1,11 +1,14 @@
 package com.university.universitysystem;
 import com.university.course.Course;
-import com.university.evaluation.Evaluation.Evaluation;
+import com.university.evaluation.EvaluationManagement;
 import com.university.student.Student;
-import com.university.universitysystem.universitysystem.Universitysystem2;
+
 
 import java.io.IOException;
 import java.util.*;
+
+import static com.university.universitysystem.universitysystem.EvaluationSystem.readArchive;
+import static com.university.universitysystem.universitysystem.EvaluationSystem.writeArchive;
 import static com.university.universitysystem.universitysystem.Universitysystem.*;
 
 
@@ -41,10 +44,10 @@ public class App {
         String outputCsv2 = "src/main/resources/solution2.csv";
 
         contarCursos(inputCsv, outputCsv);
-        Map<String, Evaluation> evaluationsMap = Universitysystem2.readCSV(inputCsv2);
-        Universitysystem2.writeCSV(outputCsv2, evaluationsMap);
-        System.out.println("Archivo generado correctamente: " + outputCsv2);
-        System.out.println("Archivo generado correctamente.");
+        EvaluationManagement evaluationManagement = new EvaluationManagement();
+        readArchive(inputCsv2, evaluationManagement);
+        eliminarArchivoSiExiste(outputCsv2);
+        writeArchive(outputCsv2, evaluationManagement);
     }
 }
 
