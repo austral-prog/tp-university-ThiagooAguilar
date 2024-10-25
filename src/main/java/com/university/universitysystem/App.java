@@ -1,13 +1,21 @@
 package com.university.universitysystem;
 import com.university.course.Course;
-import com.university.evaluation.Evaluation.Evaluation;
+import com.university.evaluation.EvaluationManagement;
+import com.university.evaluation.evaluationtypes.Evaluation;
 import com.university.student.Student;
-import com.university.universitysystem.universitysystem.Universitysystem2;
+import com.university.universitysystem.universitysystem.evaluationsystem.data.Data;
+import com.university.universitysystem.universitysystem.evaluationsystem.data.SaveData;
+
 
 import java.io.IOException;
 import java.util.*;
-import static com.university.universitysystem.universitysystem.Universitysystem.*;
 
+
+import static com.university.universitysystem.universitysystem.Universitysystem.*;
+import static com.university.universitysystem.universitysystem.evaluationsystem.data.OrderData.sortEvaluations;
+import static com.university.universitysystem.universitysystem.evaluationsystem.data.ReadArchive.readArchive;
+import static com.university.universitysystem.universitysystem.evaluationsystem.data.SaveData.saveData;
+import static com.university.universitysystem.universitysystem.evaluationsystem.data.WriteData.writeToCsv;
 
 
 public class App {
@@ -41,10 +49,11 @@ public class App {
         String outputCsv2 = "src/main/resources/solution2.csv";
 
         contarCursos(inputCsv, outputCsv);
-        Map<String, Evaluation> evaluationsMap = Universitysystem2.readCSV(inputCsv2);
-        Universitysystem2.writeCSV(outputCsv2, evaluationsMap);
-        System.out.println("Archivo generado correctamente: " + outputCsv2);
-        System.out.println("Archivo generado correctamente.");
+        EvaluationManagement evaluationManagement = new EvaluationManagement();
+        List<Data> data= readArchive(inputCsv2);
+        List<Evaluation> evaluations =  saveData(data,evaluationManagement);
+        sortEvaluations(evaluations);
+        writeToCsv(outputCsv2, evaluations);
     }
 }
 
