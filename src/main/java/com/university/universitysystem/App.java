@@ -1,7 +1,6 @@
 package com.university.universitysystem;
 import com.university.course.Course;
-import com.university.evaluation.EvaluationManagement;
-import com.university.evaluation.evaluationtypes.Evaluation;
+import com.university.evaluation.Evaluation.Evaluation;
 import com.university.student.Student;
 import com.university.universitysystem.universitysystem.evaluationsystem.data.Data;
 import com.university.universitysystem.universitysystem.evaluationsystem.data.SaveData;
@@ -9,8 +8,6 @@ import com.university.universitysystem.universitysystem.evaluationsystem.data.Sa
 
 import java.io.IOException;
 import java.util.*;
-
-
 import static com.university.universitysystem.universitysystem.Universitysystem.*;
 import static com.university.universitysystem.universitysystem.evaluationsystem.data.OrderData.sortEvaluations;
 import static com.university.universitysystem.universitysystem.evaluationsystem.data.ReadArchive.readArchive;
