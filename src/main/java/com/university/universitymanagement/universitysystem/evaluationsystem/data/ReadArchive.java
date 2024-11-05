@@ -1,6 +1,4 @@
-package com.university.universitysystem.universitysystem.evaluationsystem.data;
-
-import com.university.evaluation.EvaluationManagement;
+package com.university.universitymanagement.universitysystem.evaluationsystem.data;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

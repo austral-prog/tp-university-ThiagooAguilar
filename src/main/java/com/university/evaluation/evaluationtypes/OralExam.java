@@ -23,5 +23,16 @@ public class OralExam extends  Evaluation implements IGradeable {
         public List<Integer> getGrades() {
             return grades;
         }
+    @Override
+    public double calculateGradesResult(List<Integer> grades) {
+        if (grades == null || grades.isEmpty()) {
+            return 0.0;
+        }
+        double sum = 0;
+        for (Integer grade : grades) {
+            sum += grade;
+        }
+        return sum / grades.size();
+    }
     }
 

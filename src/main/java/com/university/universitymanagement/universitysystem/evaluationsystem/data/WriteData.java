@@ -1,11 +1,9 @@
-package com.university.universitysystem.universitysystem.evaluationsystem.data;
+package com.university.universitymanagement.universitysystem.evaluationsystem.data;
 
 import com.university.evaluation.evaluationtypes.Evaluation;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class WriteData {

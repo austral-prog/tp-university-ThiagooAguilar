@@ -11,16 +11,18 @@ public abstract class Evaluation implements IGradeable {
     private String subject;
     private String evaluationName;
     private String evaluationType;
-    public Evaluation(String studentName,String evaluationType, String subject, String evaluationName) {
+
+    public Evaluation(String studentName, String evaluationType, String subject, String evaluationName) {
         this.studentName = studentName;
         this.subject = subject;
         this.evaluationName = evaluationName;
-        this.evaluationType= evaluationType;
+        this.evaluationType = evaluationType;
     }
 
-    public String getEvaluationType(){
+    public String getEvaluationType() {
         return evaluationType;
     }
+
     public String getSubject() {
         return subject;
     }
@@ -32,9 +34,10 @@ public abstract class Evaluation implements IGradeable {
     public String getStudentName() {
         return studentName;
     }
+
     public abstract void results(Integer grade);
 
-    public abstract  List<Integer> getGrades();
+    public abstract List<Integer> getGrades();
 
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -47,7 +50,7 @@ public abstract class Evaluation implements IGradeable {
     }
 
     public int hashCode() {
-        return Objects.hash(studentName, subject, evaluationName);
+        return Objects.hash(studentName, evaluationType, subject, evaluationName);
     }
 
 

@@ -1,18 +1,18 @@
 package com.university.universitysystem;
 import com.university.course.Course;
-import com.university.evaluation.Evaluation.Evaluation;
+import com.university.evaluation.evaluationtypes.Evaluation;
 import com.university.student.Student;
-import com.university.universitysystem.universitysystem.evaluationsystem.data.Data;
-import com.university.universitysystem.universitysystem.evaluationsystem.data.SaveData;
+import com.university.universitymanagement.universitysystem.evaluationsystem.data.Data;
 
 
 import java.io.IOException;
 import java.util.*;
-import static com.university.universitysystem.universitysystem.Universitysystem.*;
-import static com.university.universitysystem.universitysystem.evaluationsystem.data.OrderData.sortEvaluations;
-import static com.university.universitysystem.universitysystem.evaluationsystem.data.ReadArchive.readArchive;
-import static com.university.universitysystem.universitysystem.evaluationsystem.data.SaveData.saveData;
-import static com.university.universitysystem.universitysystem.evaluationsystem.data.WriteData.writeToCsv;
+
+import static com.university.universitymanagement.universitysystem.Universitysystem.*;
+import static com.university.universitymanagement.universitysystem.evaluationsystem.data.OrderData.sortEvaluations;
+import static com.university.universitymanagement.universitysystem.evaluationsystem.data.ReadArchive.readArchive;
+import static com.university.universitymanagement.universitysystem.evaluationsystem.data.SaveData.saveData;
+import static com.university.universitymanagement.universitysystem.evaluationsystem.data.WriteData.writeToCsv;
 
 
 public class App {
@@ -46,9 +46,8 @@ public class App {
         String outputCsv2 = "src/main/resources/solution2.csv";
 
         contarCursos(inputCsv, outputCsv);
-        EvaluationManagement evaluationManagement = new EvaluationManagement();
         List<Data> data= readArchive(inputCsv2);
-        List<Evaluation> evaluations =  saveData(data,evaluationManagement);
+        List<Evaluation> evaluations =  saveData(data);
         sortEvaluations(evaluations);
         writeToCsv(outputCsv2, evaluations);
     }

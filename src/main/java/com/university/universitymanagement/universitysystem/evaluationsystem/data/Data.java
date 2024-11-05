@@ -1,4 +1,4 @@
-package com.university.universitysystem.universitysystem.evaluationsystem.data;
+package com.university.universitymanagement.universitysystem.evaluationsystem.data;
 
 public class Data {
     private String studentName;

@@ -1,4 +1,4 @@
-package com.university.universitysystem.universitysystem;
+package com.university.universitymanagement.universitysystem;
 
 import com.university.course.Course;
 import com.university.student.Student;
