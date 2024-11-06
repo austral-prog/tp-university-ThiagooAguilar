@@ -1,4 +1,4 @@
-package com.university.evaluation.evaluationtypes;
+package com.university.evaluation.evaluationtypes.evaluationcriteria;
 
 import java.util.ArrayList;
 import java.util.List;

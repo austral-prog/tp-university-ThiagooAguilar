@@ -13,7 +13,6 @@ public class OrderData {
     public static void sortEvaluations(List<Evaluation> evaluations) {
         Collections.sort(evaluations, new Comparator<Evaluation>() {
             public int compare(Evaluation e1, Evaluation e2) {
-                // Ordena únicamente por el nombre de la materia (subject)
                 if (e1.getSubject().equals(e2.getSubject())) {
                     if (e1.getEvaluationName().equals(e2.getEvaluationName())) {
                         return e1.getStudentName().compareTo(e2.getStudentName());

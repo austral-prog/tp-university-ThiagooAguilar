@@ -26,7 +26,6 @@ public class SaveData<T extends Evaluation> {
 
             if (existingEvaluation != null) {
                 existingEvaluation.results(data.getGrade());
-                System.out.println("Adding grade " + data.getGrade() + " to existing evaluation: " + existingEvaluation.getGrades());
             } else {
                 Evaluation newEvaluation;
                 switch (data.getEvaluationType()) {
@@ -47,7 +46,6 @@ public class SaveData<T extends Evaluation> {
                 }
                 newEvaluation.results(data.getGrade());
                 evaluations.add(newEvaluation);
-                System.out.println("Creating new evaluation with grade " + data.getGrade() + ": " + newEvaluation.getGrades());
             }
         }
 
