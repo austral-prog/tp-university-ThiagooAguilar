@@ -3,11 +3,13 @@ package com.university.CRUDRepositories;
 import com.university.CRUDRepository;
 import com.university.student.Student;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class StudentRepository implements CRUDRepository<Student> {
-    private Map<Integer, Student> students;
+    private Map<Integer, Student> students= new HashMap<>();
     public int currentId = 1;
+
     @Override
     public void create(Student student) {
         student.setId(currentId);

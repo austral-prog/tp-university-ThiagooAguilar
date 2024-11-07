@@ -1,8 +1,7 @@
 package com.university.evaluation;
 
-import com.university.evaluation.evaluationtypes.Evaluation;
+import com.university.evaluation.evaluationtypes.*;
 import com.university.evaluation.evaluationtypes.evaluationcriteria.EvaluationCriteria;
-import com.university.evaluation.evaluationtypes.WrittenExam;
 import com.university.evaluation.evaluationtypes.evaluationcriteria.FinalResults;
 import com.university.universitymanagement.universitysystem.evaluationsystem.data.Data;
 import org.junit.jupiter.api.Test;
@@ -31,6 +30,48 @@ public class EvaluationTest {
         assertEquals("WRITTEN_EXAM", exam.getEvaluationType());
         assertEquals("Maths", exam.getSubject());
         assertEquals("Primer Parcial", exam.getEvaluationName());
+    }
+
+    @Test
+    public void oralexam(){
+        Evaluation exam = new OralExam("Thiago","ORAL_EXAM","Maths", "Primer Parcial");
+        exam.results(9);
+        exam.results(8);
+        exam.results(7);
+        assertEquals(3, exam.getGrades().size(), "Wrong number of results");
+        assertEquals("Thiago", exam.getStudentName());
+        assertEquals("ORAL_EXAM", exam.getEvaluationType());
+        assertEquals("Maths", exam.getSubject());
+        assertEquals("Primer Parcial", exam.getEvaluationName());
+        assertEquals(8, exam.calculateGradesResult(exam.getGrades()), "Wrong number of results");
+    }
+
+    @Test
+    public void practicalwork(){
+        Evaluation exam= new PracticalWork("Thiago", "PRACTICAL_WORK","Maths", "Primer Parcial");
+        exam.results(9);
+        exam.results(8);
+        exam.results(7);
+        assertEquals(3, exam.getGrades().size(), "Wrong number of results");
+        assertEquals("Thiago", exam.getStudentName());
+        assertEquals("PRACTICAL_WORK", exam.getEvaluationType());
+        assertEquals("Maths", exam.getSubject());
+        assertEquals("Primer Parcial", exam.getEvaluationName());
+        assertEquals(7, exam.calculateGradesResult(exam.getGrades()), "Wrong number of results");
+    }
+
+    @Test
+    public void finalpracticalWork(){
+        Evaluation exam= new FinalPracticalWork("Thiago", "FINAL_PRACTICAL_WORK","Maths", "Primer Parcial");
+        exam.results(9);
+        exam.results(8);
+        exam.results(7);
+        assertEquals(3, exam.getGrades().size(), "Wrong number of results");
+        assertEquals("Thiago", exam.getStudentName());
+        assertEquals("FINAL_PRACTICAL_WORK", exam.getEvaluationType());
+        assertEquals("Maths", exam.getSubject());
+        assertEquals("Primer Parcial", exam.getEvaluationName());
+        assertEquals(9+8+7, exam.calculateGradesResult(exam.getGrades()), "Wrong number of results");
     }
 
     @Test

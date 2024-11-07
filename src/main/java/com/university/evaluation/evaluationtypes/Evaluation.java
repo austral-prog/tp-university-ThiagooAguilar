@@ -20,6 +20,13 @@ public abstract class Evaluation implements IGradeable, Entity {
         this.evaluationName = evaluationName;
         this.evaluationType = evaluationType;
     }
+
+    public Evaluation(){
+        this.studentName = "";
+        this.subject = "";
+        this.evaluationName = "";
+        this.evaluationType = "";
+    }
     public int getId(){
         return id;
     }

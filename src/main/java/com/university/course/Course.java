@@ -21,6 +21,12 @@ public class Course implements Entity {
         this.teacher = teacher;
 
     }
+    public Course() {
+        this.classroom = 0;
+        this.subject = "";
+        this.teacher = "";
+        this.students = new ArrayList<>();
+    }
     public int getId() {
         return id;
     }

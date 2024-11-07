@@ -12,8 +12,6 @@ public class FinalPracticalWork extends Evaluation implements IGradeable {
         super(studentName, evaluationType, subject, evaluationName);
         this.grades = new ArrayList<>();
     }
-
-
     @Override
     public void results(Integer grade) {
         grades.add(grade);

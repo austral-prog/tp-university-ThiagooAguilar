@@ -18,6 +18,11 @@ public class Student implements Entity {
         this.name = name;
         this.email = email;
     }
+    public Student(){
+        this.name = "";
+        this.email = "";
+    }
+
     public String getName() {
         return name;
     }
