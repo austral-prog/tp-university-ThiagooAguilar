@@ -5,8 +5,11 @@ import com.university.CRUDRepository;
 import com.university.Entity;
 import com.university.course.Course;
 import com.university.evaluation.evaluationtypes.*;
+import com.university.evaluation.evaluationtypes.evaluationcriteria.EvaluationCriteria;
 import com.university.student.Student;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UniversityCLI implements CLI {
@@ -97,6 +100,30 @@ public class UniversityCLI implements CLI {
     }
     private <T extends Entity> void createEntity(CRUDRepository<T> repository, Scanner scanner) {
         T entity = null;
+        try {
+            if (repository instanceof EvaluationCriteriaRepository) {
+                System.out.print("Ingrese el nombre de la materia: ");
+                String subjectName = scanner.nextLine();
+
+                System.out.print("Ingrese el tipo de criterio : ");
+                String criteriaType = scanner.nextLine();
+
+                System.out.print("Ingrese el valor del criterio: ");
+                double criteriaValue = Double.parseDouble(scanner.nextLine());
+
+                System.out.print("Ingrese la cantidad de nombres de evaluaciones que desea agregar: ");
+                int evaluationCount = Integer.parseInt(scanner.nextLine());
+
+                List<String> evaluationNames = new ArrayList<>();
+                for (int i = 0; i < evaluationCount; i++) {
+                    System.out.print("Ingrese el nombre de la evaluación " + (i + 1) + ": ");
+                    evaluationNames.add(scanner.nextLine());
+                }
+
+                EvaluationCriteria criteria = new EvaluationCriteria(subjectName, criteriaType, criteriaValue, evaluationNames);
+                entity = (T) criteria;
+            }
+
 
         if (repository instanceof CourseRepository) {
 
@@ -143,10 +170,11 @@ public class UniversityCLI implements CLI {
 
 
             switch (choice) {
-                case 1 -> entity = (T) new OralExam(studentName,"ORAL_EXAM", subject, evaluationName);
-                case 2 -> entity = (T) new WrittenExam(studentName,"WRITTEN_EXAM", subject, evaluationName);
-                case 3 -> entity = (T) new PracticalWork(studentName,"PRACTICAL_WORK", subject, evaluationName);
-                case 4 -> entity = (T) new FinalPracticalWork(studentName,"FINAL_PRACTICAL_WORK", subject, evaluationName);
+                case 1 -> entity = (T) new OralExam(studentName, "ORAL_EXAM", subject, evaluationName);
+                case 2 -> entity = (T) new WrittenExam(studentName, "WRITTEN_EXAM", subject, evaluationName);
+                case 3 -> entity = (T) new PracticalWork(studentName, "PRACTICAL_WORK", subject, evaluationName);
+                case 4 ->
+                        entity = (T) new FinalPracticalWork(studentName, "FINAL_PRACTICAL_WORK", subject, evaluationName);
                 default -> System.out.println("Opción inválida.");
             }
         }
@@ -157,80 +185,115 @@ public class UniversityCLI implements CLI {
         } else {
             System.out.println("No se pudo crear la entidad.");
         }
+    } catch(NumberFormatException e){
+            System.out.println("Error: Se esperaba un número.");
+        }
+        catch (Exception e) {
+            System.out.println("Ha ocurrido un error inesperado: " + e.getMessage());
+        }
     }
     private <T extends Entity> void updateEntity(CRUDRepository<T> repository, Scanner scanner) {
         System.out.print("Ingrese el ID de la entidad que desea actualizar: ");
         int id = Integer.parseInt(scanner.nextLine());
         T existingEntity = repository.read(id);
 
-        if (existingEntity == null) {
-            System.out.println("Entidad con ID " + id + " no encontrada.");
-            return;
-        }
+        try {
 
-        T updatedEntity = null;
+            if (existingEntity == null) {
+                System.out.println("Entidad con ID " + id + " no encontrada.");
+                return;
+            }
 
-        if (repository instanceof CourseRepository) {
-            System.out.print("Ingrese el nuevo nombre del curso (actual: " + ((Course) existingEntity).getSubject() + "): ");
-            String subject = scanner.nextLine();
+            T updatedEntity = null;
 
-            System.out.print("Ingrese el nuevo aula (actual: " + ((Course) existingEntity).getClassroom() + "): ");
-            int classroom = Integer.parseInt(scanner.nextLine());
+            if (repository instanceof EvaluationCriteriaRepository) {
+                System.out.print("Ingrese el nuevo nombre de la materia (actual: " + ((EvaluationCriteria) existingEntity).getSubjectName() + "): ");
+                String subjectName = scanner.nextLine();
 
-            System.out.print("Ingrese el nuevo profesor (actual: " + ((Course) existingEntity).getTeacher() + "): ");
-            String teacher = scanner.nextLine();
+                System.out.print("Ingrese el nuevo tipo de criterio (actual: " + ((EvaluationCriteria) existingEntity).getCriteriaType() + "): ");
+                String criteriaType = scanner.nextLine();
+                System.out.print("Ingrese el nuevo valor del criterio (actual: " + ((EvaluationCriteria) existingEntity).getCriteriaValue() + "): ");
+                double criteriaValue = Double.parseDouble(scanner.nextLine());
 
-            Course updatedCourse = new Course(classroom, subject, teacher);
-            updatedCourse.setId(id);
-            updatedEntity = (T) updatedCourse;
+                System.out.print("Ingrese la cantidad de nombres de evaluaciones que desea actualizar: ");
+                int evaluationCount = Integer.parseInt(scanner.nextLine());
 
-        } else if (repository instanceof StudentRepository) {
-            System.out.print("Ingrese el nuevo nombre del estudiante (actual: " + ((Student) existingEntity).getName() + "): ");
-            String studentName = scanner.nextLine();
+                List<String> evaluationNames = new ArrayList<>();
+                for (int i = 0; i < evaluationCount; i++) {
+                    System.out.print("Ingrese el nombre de la evaluación " + (i + 1) + ": ");
+                    evaluationNames.add(scanner.nextLine());
+                }
 
-            System.out.print("Ingrese la nueva matrícula del estudiante (actual: " + ((Student) existingEntity).getId() + "): ");
-            String studentId = scanner.nextLine();
+                EvaluationCriteria updatedCriteria = new EvaluationCriteria(subjectName, criteriaType, criteriaValue, evaluationNames);
+                updatedCriteria.setId(id); // Mantener el ID de la entidad existente
+                updatedEntity = (T) updatedCriteria;
+            }
 
-            Student updatedStudent = new Student(studentName, studentId);
-            updatedStudent.setId(id);
-            updatedEntity = (T) updatedStudent;
+            if (repository instanceof CourseRepository) {
+                System.out.print("Ingrese el nuevo nombre del curso (actual: " + ((Course) existingEntity).getSubject() + "): ");
+                String subject = scanner.nextLine();
 
-        } else if (repository instanceof EvaluationRepository) {
+                System.out.print("Ingrese el nuevo aula (actual: " + ((Course) existingEntity).getClassroom() + "): ");
+                int classroom = Integer.parseInt(scanner.nextLine());
+                System.out.print("Ingrese el nuevo profesor (actual: " + ((Course) existingEntity).getTeacher() + "): ");
+                String teacher = scanner.nextLine();
 
-            System.out.println("Seleccione el tipo de evaluación:");
-            System.out.println("1. Oral Exam");
-            System.out.println("2. Written Exam");
-            System.out.println("3. Practical Work");
-            System.out.println("4. Final Practical Work");
-            int choice = Integer.parseInt(scanner.nextLine());
+                Course updatedCourse = new Course(classroom, subject, teacher);
+                updatedCourse.setId(id);
+                updatedEntity = (T) updatedCourse;
 
-            System.out.print("Ingrese el nuevo nombre del estudiante (actual: " + ((Evaluation) existingEntity).getStudentName() + "): ");
-            String studentName = scanner.nextLine();
+            } else if (repository instanceof StudentRepository) {
+                System.out.print("Ingrese el nuevo nombre del estudiante (actual: " + ((Student) existingEntity).getName() + "): ");
+                String studentName = scanner.nextLine();
 
-            System.out.print("Ingrese la nueva materia (actual: " + ((Evaluation) existingEntity).getSubject() + "): ");
-            String subject = scanner.nextLine();
+                System.out.print("Ingrese la nueva matrícula del estudiante (actual: " + ((Student) existingEntity).getId() + "): ");
+                String studentId = scanner.nextLine();
 
-            System.out.print("Ingrese el nuevo nombre de la evaluación (actual: " + ((Evaluation) existingEntity).getEvaluationName() + "): ");
-            String evaluationName = scanner.nextLine();
+                Student updatedStudent = new Student(studentName, studentId);
+                updatedStudent.setId(id);
+                updatedEntity = (T) updatedStudent;
 
-            switch (choice) {
-                case 1 -> updatedEntity = (T) new OralExam(studentName, "ORAL_EXAM", subject, evaluationName);
-                case 2 -> updatedEntity = (T) new WrittenExam(studentName, "WRITTEN_EXAM", subject, evaluationName);
-                case 3 -> updatedEntity = (T) new PracticalWork(studentName, "PRACTICAL_WORK", subject, evaluationName);
-                case 4 -> updatedEntity = (T) new FinalPracticalWork(studentName, "FINAL_PRACTICAL_WORK", subject, evaluationName);
-                default -> System.out.println("Opción inválida.");
+            } else if (repository instanceof EvaluationRepository) {
+
+                System.out.println("Seleccione el tipo de evaluación:");
+                System.out.println("1. Oral Exam");
+                System.out.println("2. Written Exam");
+                System.out.println("3. Practical Work");
+                System.out.println("4. Final Practical Work");
+                int choice = Integer.parseInt(scanner.nextLine());
+
+                System.out.print("Ingrese el nuevo nombre del estudiante (actual: " + ((Evaluation) existingEntity).getStudentName() + "): ");
+                String studentName = scanner.nextLine();
+
+                System.out.print("Ingrese la nueva materia (actual: " + ((Evaluation) existingEntity).getSubject() + "): ");
+                String subject = scanner.nextLine();
+
+                System.out.print("Ingrese el nuevo nombre de la evaluación (actual: " + ((Evaluation) existingEntity).getEvaluationName() + "): ");
+                String evaluationName = scanner.nextLine();
+
+                switch (choice) {
+                    case 1 -> updatedEntity = (T) new OralExam(studentName, "ORAL_EXAM", subject, evaluationName);
+                    case 2 -> updatedEntity = (T) new WrittenExam(studentName, "WRITTEN_EXAM", subject, evaluationName);
+                    case 3 ->
+                            updatedEntity = (T) new PracticalWork(studentName, "PRACTICAL_WORK", subject, evaluationName);
+                    case 4 ->
+                            updatedEntity = (T) new FinalPracticalWork(studentName, "FINAL_PRACTICAL_WORK", subject, evaluationName);
+                    default -> System.out.println("Opción inválida.");
+                }
+
+                if (updatedEntity != null) {
+                    ((Evaluation) updatedEntity).setId(id);
+                }
             }
 
             if (updatedEntity != null) {
-                ((Evaluation) updatedEntity).setId(id);
+                repository.update(id, updatedEntity);
+                System.out.println("Entidad actualizada exitosamente.");
+            } else {
+                System.out.println("No se pudo actualizar la entidad.");
             }
-        }
-
-        if (updatedEntity != null) {
-            repository.update(id, updatedEntity);
-            System.out.println("Entidad actualizada exitosamente.");
-        } else {
-            System.out.println("No se pudo actualizar la entidad.");
+        } catch (Exception e) {
+            System.out.println("Ha ocurrido un error inesperado" + e.getMessage());
         }
     }
 

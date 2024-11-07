@@ -1,3 +1,3 @@
 com.university.CRUDRepositories.CourseRepository
 com.university.CRUDRepositories.StudentRepository
-com.university.CRUDRepositories.EvaluationRepository
+com.university.CRUDRepositories.EvaluationCriteriaRepository

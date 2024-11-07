@@ -1,9 +1,12 @@
 package com.university.evaluation.evaluationtypes.evaluationcriteria;
 
+import com.university.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class EvaluationCriteria {
+public class EvaluationCriteria implements Entity {
+    private int id;
     private String subjectName;
     private String criteriaType;
     private double criteriaValue;
@@ -14,6 +17,18 @@ public class EvaluationCriteria {
         this.criteriaType = criteriaType;
         this.criteriaValue = criteriaValue;
         this.evaluationNames = new ArrayList<>(evaluationNames);
+    }
+    public EvaluationCriteria(){
+        this.evaluationNames = new ArrayList<>();
+        this.subjectName = "";
+        this.criteriaType = "";
+        this.criteriaValue = 0;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
     public String getSubjectName() {
         return subjectName;
