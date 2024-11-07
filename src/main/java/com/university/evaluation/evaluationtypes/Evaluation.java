@@ -1,12 +1,14 @@
 package com.university.evaluation.evaluationtypes;
 
+import com.university.Entity;
 import com.university.evaluation.methods.IGradeable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Evaluation implements IGradeable {
+public abstract class Evaluation implements IGradeable, Entity {
+    private Integer id;
     private String studentName;
     private String subject;
     private String evaluationName;
@@ -17,6 +19,12 @@ public abstract class Evaluation implements IGradeable {
         this.subject = subject;
         this.evaluationName = evaluationName;
         this.evaluationType = evaluationType;
+    }
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getEvaluationType() {

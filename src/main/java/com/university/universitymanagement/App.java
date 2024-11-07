@@ -1,10 +1,10 @@
-package com.university.universitysystem;
-import com.university.courseTest.java.Course;
+package com.university.universitymanagement;
 import com.university.evaluation.evaluationtypes.Evaluation;
 import com.university.evaluation.evaluationtypes.evaluationcriteria.EvaluationCriteria;
 import com.university.evaluation.evaluationtypes.evaluationcriteria.FinalResults;
 import com.university.evaluation.evaluationtypes.evaluationcriteria.StatusResults;
-import com.university.studentTest.java.Student;
+import com.university.student.Student;
+import com.university.course.Course;
 import com.university.universitymanagement.universitysystem.evaluationsystem.data.Data;
 
 
@@ -29,7 +29,7 @@ public class App {
     public static void contarCursos(String inputCsv, String outputCsv) {
         // Usamos tipos genéricos para estudiantes y cursos
         Map<String, Student> estudiantesMap = new HashMap<>();
-        Map<String, Course<Student>> cursosMap = new HashMap<>();  // Curso ahora es de tipo generico Course<Student>
+        Map<String, Course> cursosMap = new HashMap<>();  // Curso ahora es de tipo generico Course<Student>
 
         // Eliminar el archivo solution.csv si ya existe
         eliminarArchivoSiExiste(outputCsv);
