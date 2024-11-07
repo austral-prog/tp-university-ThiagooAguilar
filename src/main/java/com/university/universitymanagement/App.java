@@ -1,4 +1,6 @@
 package com.university.universitymanagement;
+import com.university.CRUDRepositories.*;
+import com.university.CRUDRepository;
 import com.university.evaluation.evaluationtypes.Evaluation;
 import com.university.evaluation.evaluationtypes.evaluationcriteria.EvaluationCriteria;
 import com.university.evaluation.evaluationtypes.evaluationcriteria.FinalResults;
@@ -27,21 +29,16 @@ import static com.university.universitymanagement.universitysystem.evaluationsys
 
 public class App {
     public static void contarCursos(String inputCsv, String outputCsv) {
-        // Usamos tipos genéricos para estudiantes y cursos
         Map<String, Student> estudiantesMap = new HashMap<>();
-        Map<String, Course> cursosMap = new HashMap<>();  // Curso ahora es de tipo generico Course<Student>
+        Map<String, Course> cursosMap = new HashMap<>();
 
-        // Eliminar el archivo solution.csv si ya existe
         eliminarArchivoSiExiste(outputCsv);
 
-        // Leer el archivo CSV y procesar datos
         leerArchivoCSV(inputCsv, estudiantesMap, cursosMap);
 
-        // Ordenar estudiantes por nombre
         List<Student> estudiantesOrdenados = new ArrayList<>(estudiantesMap.values());
         estudiantesOrdenados.sort(Comparator.comparing(Student::getName));
 
-        // Escribir resultados en el archivo de salida
         escribirArchivoCSV(outputCsv, estudiantesOrdenados);
     }
 
@@ -70,8 +67,25 @@ public class App {
         List<StatusResults> listofstatusresults= evaluateResults(finalresultsandcriterias);
         sortResults(listofstatusresults);
         writeToCsv2(outputCsv3, listofstatusresults);
+
+        CourseRepository courseRepository = new CourseRepository();
+        StudentRepository studentRepository = new StudentRepository();
+        EvaluationRepository evaluationRepository = new EvaluationRepository();
+        EvaluationCriteriaRepository evaluationCriteriaRepository = new EvaluationCriteriaRepository();
+
+
+        CRUDRepository<?>[] repositories = {
+                courseRepository,
+                studentRepository,
+                evaluationRepository,
+                evaluationCriteriaRepository
+        };
+
+        UniversityCLI cli = new UniversityCLI();
+        cli.runCLI(repositories);
     }
 }
+
 
 
 
